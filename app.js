@@ -41,6 +41,10 @@ io.of("/socket").on("connection", (socket) => {
     socket.on("salutations", (greeting) => {
         console.log(greeting);
     })
+    socket.on("message", (message) => {
+        socket.emit("Mymessage", `${message}?oh really`)
+
+    })
 });
 
 
