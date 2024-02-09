@@ -1,12 +1,16 @@
-const express = require("express");
-const app = express();
-const PORT = 3000;
+import { createServer } from "http";
+import { Server } from "socket.io";
 
-app.get("/", (req, res) => {
-    res.status(200).send("<h2> Wagwan </h2>")
-})
+const httpServer = createServer();
+const io = new Server(httpServer, {
+    cors: {
+        origin: "https://example.com"
+    }
+});
 
+io.on("connection", (socket) => {
+    console.log("Connection Successful")
+    console.log(socket.id)
+});
 
-app.listen(() => {
-    console.log(`Server is listening on port ${PORT}`)
-})
+io.listen(3000)
